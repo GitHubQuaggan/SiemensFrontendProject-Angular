@@ -6,8 +6,43 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://static.sw.cdn.siemens.com/vision/disw-vision.css"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://prototypes.swi.siemens.com/css/disw-sub-header.css"
+  />
+  <script src="https://static.sw.cdn.siemens.com/disw/disw-utils/1.x/disw-utils.min.js"></script>
+  <script>
+    window.disw.init();
+  </script>
+  <script
+    type="module"
+    src="https://static.sw.cdn.siemens.com/disw/universal-components/1.x/esm/index.module.js"
+  ></script>
+  <script type="module">
+    window.universalComponents.init(["disw-header-v2", "disw-footer"]);
+  </script>
+  <script>
+    const ajax = new XMLHttpRequest();
+    ajax.open(
+      "GET",
+      "https://static.sw.cdn.siemens.com/icons/icons-vision.svg",
+      true
+    );
+    ajax.send();
+    ajax.onload = function (e) {
+      const div = document.createElement("div");
+      div.innerHTML = ajax.responseText;
+      document.body.insertBefore(div, document.body.childNodes[0]);
+    };
+  </script>
 </head>
-<body>
+<body class="body-fixed-top">
   <app-root></app-root>
 </body>
 </html>

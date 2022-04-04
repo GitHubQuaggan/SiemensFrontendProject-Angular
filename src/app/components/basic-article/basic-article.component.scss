@@ -1,0 +1,10 @@
+.basic-article-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.article-bottom-border {
+  margin-top: 2rem;
+  border-bottom: 2px solid var(--color-grey-light);
+}

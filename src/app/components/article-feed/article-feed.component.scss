@@ -1,0 +1,9 @@
+.article-filters {
+  display: flex;
+  justify-content: space-between;
+}
+
+app-dropdown-filter {
+  width: 100%;
+  z-index: 1000;
+}
