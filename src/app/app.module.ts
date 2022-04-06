@@ -11,6 +11,9 @@ import { FeaturedArticleComponent } from './components/featured-article/featured
 import { BasicArticleComponent } from './components/basic-article/basic-article.component';
 import { ArticleFeedComponent } from './components/article-feed/article-feed.component';
 import { DropdownFilterComponent } from './components/dropdown-filter/dropdown-filter.component';
+import { NewsroomPageComponent } from './pages/newsroom-page/newsroom-page.component';
+import { ArticlePageComponent } from './pages/article-page/article-page.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -22,10 +25,13 @@ import { DropdownFilterComponent } from './components/dropdown-filter/dropdown-f
     FeaturedArticleComponent,
     BasicArticleComponent,
     ArticleFeedComponent,
-    DropdownFilterComponent
+    DropdownFilterComponent,
+    NewsroomPageComponent,
+    ArticlePageComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [
     ArticlesService

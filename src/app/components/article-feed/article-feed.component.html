@@ -17,7 +17,7 @@
   </div>
 
   <!--https://zeroheight.com/247bb2e30/v/latest/p/079890-headings/b/524232-->
-  <div *ngFor="let category of categoryArticleMap.keys()" class="bg-white p-a-sm display-flex">
+  <div *ngFor="let category of currentCategories" class="bg-white p-a-sm display-flex">
     <div class="col-md-9">
       <div>
         <div class="group-focus">
@@ -35,7 +35,7 @@
         </app-basic-article>
       </div>
       <div class="article-group-footer display-flex justify-content-center">
-        <h3><a href="#" class="btn-text m-b-md m-md-b-0">See More</a></h3>
+        <h3><a [routerLink]="['/article', category]" class="btn-text m-b-md m-md-b-0">See More</a></h3>
       </div>
     </div>
     <div *ngIf="category === 'Press Release'" class="col-md-3 p-x-md press-contact">

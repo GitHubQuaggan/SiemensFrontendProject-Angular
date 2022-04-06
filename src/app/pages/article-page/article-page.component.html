@@ -1,0 +1,24 @@
+<div class="container p-y-md p-lg-y-lg">
+  <div class="back-to-newsroom">
+    <h3><a [routerLink]="['/newsroom']" class="btn-text m-b-md m-md-b-0">Back to Newsroom</a></h3>
+  </div>
+  <div>
+    <div>
+      <div>
+        <div class="group-focus">
+          <strong class="text-kicker">News</strong>
+          <h1>{{categoryLabel}}</h1>
+        </div>
+        <p>{{categoryDesc}}</p>
+      </div>
+      <div>
+        <app-basic-article *ngFor="let article of articles"
+                            [category]="article.category"
+                            [headerText]="article.headerText"
+                            [previewText]="article.previewText"
+                            [publishDate]="article.publishDate">
+        </app-basic-article>
+      </div>
+    </div>
+  </div>
+</div>

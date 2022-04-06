@@ -25,20 +25,17 @@ export class ArticleFeedComponent implements OnInit {
 
   categoryArticleMap: Map<string, Article[]> = new Map<string, Article[]>()
   articleCategories: ArticleCategory[] = new Array<ArticleCategory>();
-  articles: Article[] = new Array<Article>();
-  displayArticles: Article[] = new Array<Article>();
   selectedCategories: string[] = new Array<string>();
   selectedYearsPublished: string[] = new Array<string>();
+  currentCategories: string[] = new Array<string>();
 
   constructor(private readonly articlesService: ArticlesService) { }
 
   ngOnInit(): void {
     this.articleCategories = this.articlesService.getArticleCategories();
-    this.articles = this.articlesService.getArticles();
-    this.displayArticles = [...this.articles];
     this.populateCategoryDropdown();
-    this.populateYearPublishedDropdown();
     this.updateDisplayedArticles();
+    this.populateYearPublishedDropdown();
   }
 
   populateCategoryDropdown() {
@@ -59,21 +56,34 @@ export class ArticleFeedComponent implements OnInit {
     });
   }
 
+  /** Populate the Years Published dropdown using the articles retrieved from the ArticleService. */
   populateYearPublishedDropdown() {
-    this.articles.forEach((article) => {
-      const year = getYearFromDate(article.publishDate);
-      const index = this.yearDropdown.items.findIndex((currentItem) => {
-        return currentItem.value === year;
-      });
-      if (index < 0) {
-        const newItem: DropdownItem = {
-          value: year,
-          name: year,
-          label: year
+    this.categoryArticleMap.forEach((articles, category, map) => {
+      articles.forEach((article) => {
+        const year = getYearFromDate(article.publishDate);
+        const index = this.yearDropdown.items.findIndex((currentItem) => {
+          return currentItem.value === year;
+        });
+        if (index < 0) {
+          const newItem: DropdownItem = {
+            value: year,
+            name: year,
+            label: year
+          }
+          this.yearDropdown.items.push(newItem);
+          this.selectedYearsPublished.push(year);
         }
-        this.yearDropdown.items.push(newItem);
-        this.selectedYearsPublished.push(year);
+      });
+    });
+
+    // Sort the years by descending value
+    this.yearDropdown.items.sort((a, b) => {
+      if (a.value < b.value) {
+        return 1;
+      } else if (a.value > b.value) {
+        return -1;
       }
+      return 0;
     });
   }
 
@@ -98,7 +108,10 @@ export class ArticleFeedComponent implements OnInit {
         this.categoryArticleMap.set(category, [article]);
       }
     });
-    console.log(this.categoryArticleMap);
+
+    // Bind this so it can be used in the html
+    // https://stackoverflow.com/questions/47079366/expression-has-changed-after-it-was-checked-during-iteration-by-map-keys-in-angu
+    this.currentCategories = Array.from(this.categoryArticleMap.keys());
   }
 
   getCategoryDescription(label: string) {

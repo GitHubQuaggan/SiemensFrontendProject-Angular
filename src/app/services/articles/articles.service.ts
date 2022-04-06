@@ -75,10 +75,19 @@ export class ArticlesService {
     const filteredArticles: Article[] = new Array<Article>();
     const articles = this.getArticles();
     articles.forEach((article) => {
-      if (categories.includes(article.category) && yearsPublished.includes(getYearFromDate(article.publishDate))) {
+      const filterByYear = yearsPublished.length === 0 || yearsPublished.includes(getYearFromDate(article.publishDate));
+      if (categories.includes(article.category) && filterByYear) {
         filteredArticles.push(article);
       }
     });
     return filteredArticles;
+  }
+
+  getCategoryDescByLabel(label: string) {
+    const categories: ArticleCategory[] = this.getArticleCategories();
+    const foundCategory = categories.find((category) => {
+      return category.label === label;
+    });
+    return foundCategory?.description;
   }
 }
