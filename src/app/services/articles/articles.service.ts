@@ -9,8 +9,12 @@ export class ArticlesService {
 
   constructor() { }
 
+  /**
+   * Returns a list of article categories (such as from a database).
+   * @returns List of article categories
+   * */
   getArticleCategories() {
-    // Assume that categories are returned from endpoint in asc sorted order
+    // Assume that categories are returned from endpoint in asc sorted order by category label
     const categories: ArticleCategory[] = [
       {
         label: 'Customer Story',
@@ -28,7 +32,11 @@ export class ArticlesService {
     return categories;
   }
 
-  getArticles() {
+  /**
+   * Gets all articles. Acts as the Articles table in a database.
+   * @returns A list of articles
+  */
+  private getArticles() {
     // Assume articles are returned sorted by publish date desc
     const articles: Article[] = [
       {
@@ -70,12 +78,22 @@ export class ArticlesService {
     return articles;
   }
 
+  /**
+   * Returns a set of articles that match the specified filters.
+   * @param categories An array containing article categories to filter
+   * @param yearsPublished An array containing the years published to filter
+   * @returns A list of articles that match the filters
+  */
   getArticlesByFilters(categories: string[], yearsPublished: string[]) {
     // Simulate a query to get articles given the specified filter values
     const filteredArticles: Article[] = new Array<Article>();
     const articles = this.getArticles();
+
     articles.forEach((article) => {
+      // If the yearsPublished filter is empty, return articles for all years
       const filterByYear = yearsPublished.length === 0 || yearsPublished.includes(getYearFromDate(article.publishDate));
+
+      // Check for match by category and year
       if (categories.includes(article.category) && filterByYear) {
         filteredArticles.push(article);
       }
@@ -83,8 +101,16 @@ export class ArticlesService {
     return filteredArticles;
   }
 
+  /**
+   * Gets the description of a category when given its label.
+   * @param label The label of the category
+   * @returns The corresponding description of the category
+  */
   getCategoryDescByLabel(label: string) {
+    // Get all categories
     const categories: ArticleCategory[] = this.getArticleCategories();
+
+    // Find the category that matches the specified label
     const foundCategory = categories.find((category) => {
       return category.label === label;
     });

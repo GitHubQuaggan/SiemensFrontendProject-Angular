@@ -17,9 +17,16 @@ export class ArticlePageComponent implements OnInit {
               private readonly articlesService: ArticlesService) { }
 
   ngOnInit(): void {
+    // Scroll to the top of the page
     window.scrollTo(0, 0);
+
+    // Get the category label from the URL param
     this.categoryLabel = this.route.snapshot.paramMap.get('category') ?? '';
+
+    // Get the description of the category
     this.categoryDesc = this.articlesService.getCategoryDescByLabel(this.categoryLabel) ?? '';
+
+    // Get the articles for the category (all publish years)
     this.articles = this.articlesService.getArticlesByFilters([this.categoryLabel], []);
   }
 
