@@ -7,3 +7,17 @@ app-dropdown-filter {
   width: 100%;
   z-index: 1000;
 }
+
+.article-group-footer {
+  margin: 1rem 0 3rem 0;
+}
+
+.press-contact {
+  h4 {
+    margin-bottom: 0;
+  }
+  a {
+    color: var(--color-blue);
+    text-decoration: none;
+  }
+}

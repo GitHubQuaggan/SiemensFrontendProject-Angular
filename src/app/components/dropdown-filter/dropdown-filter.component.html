@@ -8,29 +8,14 @@
       </button>
     </h4>
     <div id="resource-filters" class="border-1 border-b border-r border-l border-grey filter-card">
-      <div class="p-a hover-bg-grey-lighter">
-        <input type="checkbox" name="customer" id="customer" class="filter form-checkbox" data-value="Customer Story" />
-        <label class="form-checkbox-label item-flex" for="customer">Customer Stories</label>
-      </div>
-
-      <div class="p-a hover-bg-grey-lighter">
-        <input type="checkbox" name="whitepaper" id="whitepaper" class="filter form-checkbox" data-value="White Paper" />
-        <label class="form-checkbox-label item-flex" for="whitepaper">White Papers</label>
-      </div>
-
-      <div class="p-a hover-bg-grey-lighter">
-        <input type="checkbox" name="webinar" id="webinar" class="filter form-checkbox" data-value="On-Demand Webinar" />
-        <label class="form-checkbox-label item-flex" for="webinar">On-Demand Webinars</label>
-      </div>
-
-      <div class="p-a hover-bg-grey-lighter">
-        <input type="checkbox" name="webinar-live" id="webinar-live" class="filter form-checkbox" data-value="Live Webinar" />
-        <label class="form-checkbox-label item-flex" for="webinar-live">Live Webinars</label>
-      </div>
-
-      <div class="p-a hover-bg-grey-lighter">
-        <input type="checkbox" name="factsheet" id="factsheet" class="filter form-checkbox" data-value="Factsheet" />
-        <label class="form-checkbox-label item-flex" for="factsheet">Factsheets</label>
+      <div *ngFor="let item of items" class="p-a hover-bg-grey-lighter">
+        <input type="checkbox"
+                [name]="item.name"
+                [id]="item.name"
+                class="filter form-checkbox"
+                data-value="{{item.label}}"
+                (click)="onItemSelect($event)"/>
+        <label class="form-checkbox-label item-flex" for="{{item.name}}">{{item.label}}</label>
       </div>
 
     </div>

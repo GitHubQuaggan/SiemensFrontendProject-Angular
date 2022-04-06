@@ -7,9 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BasicArticleComponent implements OnInit {
   @Input() category = 'Category';
-  @Input() headerTxt = 'HEADER';
-  @Input() previewTxt = 'Preview here';
-  @Input() publishDate = '03 April 2022';
+  @Input() headerText = 'Header';
+  @Input() previewText = 'Preview';
+  @Input() publishDate = 'Date';
 
   constructor() { }
 

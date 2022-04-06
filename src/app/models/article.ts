@@ -5,3 +5,8 @@ export interface Article {
   fullText: string;
   publishDate: string;
 }
+
+export interface ArticleCategory {
+  label: string;
+  description: string;
+}
